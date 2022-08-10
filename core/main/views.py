@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import ListView, DetailView
+from .models import Category, Car
 
 def register_request(request):
 	if request.method == "POST":
@@ -45,4 +46,12 @@ class HomeListView(ListView):
     template_name = 'home.html'
 
     def get(self, request):
-        return render(request, self.template_name)
+        categories = Category.objects.all()
+        return render(request, self.template_name, {'categories':categories})
+
+class CarListView(ListView):
+	template_name = 'home_detail.html'
+
+	def get(self, request, id):
+		cars = Category.objects.filter(pk=id)
+		return render(request, self.template_name, {'cars':cars})
