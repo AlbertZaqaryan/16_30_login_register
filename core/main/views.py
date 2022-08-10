@@ -55,3 +55,10 @@ class CarListView(ListView):
 	def get(self, request, id):
 		cars = Category.objects.filter(pk=id)
 		return render(request, self.template_name, {'cars':cars})
+
+class CarDetailView(DetailView):
+	template_name = 'home_detail_detail.html'
+
+	def get(self, request, id):
+		car = Car.objects.get(pk=id)
+		return render(request, self.template_name, {'car':car})

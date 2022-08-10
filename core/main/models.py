@@ -19,6 +19,7 @@ class Car(models.Model):
     about = models.TextField('Car about')
     img = models.ImageField('Car image', upload_to='media')
     price = models.IntegerField('Car price')
+    history = models.TextField('Car history', null=True)
 
     def __str__(self):
         return self.name
